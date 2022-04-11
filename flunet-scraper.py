@@ -36,17 +36,17 @@ types = [
 ]
 
 def process_country(df, driver, wait, output_file, index=0):
-    filterBy = Select(driver.find_element_by_id('lstSearchBy'))
-    yearFrom = Select(driver.find_element_by_id('ctl_list_YearFrom'))
-    weekFrom = Select(driver.find_element_by_id('ctl_list_WeekFrom'))
-    yearTo = Select(driver.find_element_by_id('ctl_list_YearTo'))
-    weekTo = Select(driver.find_element_by_id('ctl_list_WeekTo'))
+    filterBy = Select(driver.find_element(By.ID, 'lstSearchBy'))
+    yearFrom = Select(driver.find_element(By.ID, 'ctl_list_YearFrom'))
+    weekFrom = Select(driver.find_element(By.ID, 'ctl_list_WeekFrom'))
+    yearTo = Select(driver.find_element(By.ID, 'ctl_list_YearTo'))
+    weekTo = Select(driver.find_element(By.ID, 'ctl_list_WeekTo'))
 
-    display_button = driver.find_element_by_id('ctl_ViewReport')
+    display_button = driver.find_element(By.ID, 'ctl_ViewReport')
 
     filterBy .deselect_all()
 
-    yearFrom.select_by_value('1995')
+    yearFrom.select_by_value('2020')
     weekFrom.select_by_value('1')
     yearTo.select_by_index(0)
     weekTo.select_by_value("53")
@@ -86,7 +86,7 @@ def scrape_flunet(resume_file, output_file):
     driver.get('https://apps.who.int/flumart/Default?ReportNo=12')
     wait = WebDriverWait(driver, 720)
 
-    filterBy = Select(driver.find_element_by_id('lstSearchBy'))
+    filterBy = Select(driver.find_element(By.ID, 'lstSearchBy'))
     region_options = [x.text for x in filterBy.options]
 
     df = pd.DataFrame(columns=types)
